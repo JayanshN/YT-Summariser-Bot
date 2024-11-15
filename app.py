@@ -102,7 +102,7 @@ async def yt_tldr(ctx,url):
                 ''',
             },
             ])
-            return response(['message']['content'])
+            return response['message']['content']
         
         for i,chunk in  enumerate(chunks,start=1):
             summary = await process_chunks(chunk,i)
@@ -121,7 +121,7 @@ async def yt_tldr(ctx,url):
                 'content': full_transcript,
             },
             ])
-            final_summary = response(['message']['content'])
+            final_summary = response['message']['content']
             await ctx.send(final_summary)
 
 @bot.command(name='ideas')
@@ -156,7 +156,7 @@ async def extract_ideas(ctx,url):
                 ''',
         },
         ])
-    ideas = response(['message']['content'])
+    ideas = response['message']['content']
     await ctx.send(ideas)
 
 
