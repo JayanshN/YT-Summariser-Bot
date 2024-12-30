@@ -1,6 +1,5 @@
 import os
 import discord
-import ollama
 import tiktoken
 
 from discord.ext import commands
@@ -9,6 +8,9 @@ from youtube_transcript_api._errors import NoTranscriptFound, TranscriptsDisable
 from dotenv import load_dotenv
 from urllib.parse import urlparse, parse_qs
 from groq import Groq
+
+from flask import Flask
+from threading import Thread
 
 load_dotenv()
 
@@ -20,6 +22,18 @@ client = Groq(
 
 intents = discord.Intents.default()
 intents.message_content = True
+
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Bot is running!"
+
+def run():
+    app.run(host='0.0.0.0', port=8080)
+
+# Start the web server in a separate thread
+Thread(target=run).start()
 
 bot = commands.Bot(command_prefix='/', intents=intents)
 
